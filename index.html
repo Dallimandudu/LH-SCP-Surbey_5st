@@ -299,6 +299,13 @@
   }
   .radio-group label:has(input:checked){border-color:var(--point); background:var(--point-soft); font-weight:600;}
 
+  /* 기타 항목의 라디오 + 직접입력 텍스트 필드를 담는 래퍼 (라디오 토글 오작동 방지용 구조) */
+  .etc-option-row{
+    display:flex; align-items:center; gap:10px; flex:1; min-width: 120px;
+  }
+  .etc-option-row > label{ flex:none; min-width:auto; }
+  .etc-option-row > .text-input{ margin-top:0; flex:1; min-width:0; }
+
   .text-input{
     width:100%; padding:14px 16px; border:1.5px solid var(--line); border-radius:8px;
     background:#fff; font-family:var(--sans); font-size:16px; color:var(--ink);
@@ -344,6 +351,7 @@
   }
   #nextBtn:hover{transform:translateY(-2px); background:#172554;}
   #nextBtn:active{transform:translateY(0);}
+  #nextBtn:disabled{opacity:0.6; cursor:not-allowed; transform:none;}
   
   .step-indicator{ font-family:var(--sans); font-weight:600; font-size:14px; color:var(--navy); letter-spacing: 0.02em; }
   
@@ -480,7 +488,10 @@
                 <label><input type="radio" name="q1_motivation" value="상사 및 동료의 추천"> 상사 및 동료의 추천</label>
                 <label><input type="radio" name="q1_motivation" value="강제참석(필수이수 등)"> 강제참석(필수이수 등)</label>
                 <label><input type="radio" name="q1_motivation" value="자기계발"> 자기계발</label>
-                <label><input type="radio" name="q1_motivation" value="기타"> 기타 <input type="text" name="q1_motivation_etc" class="text-input" style="width: auto; padding: 4px 8px; margin-top:0;" placeholder="직접입력"></label>
+                <div class="etc-option-row">
+                  <label><input type="radio" name="q1_motivation" value="기타" id="q1_etc_radio"> 기타</label>
+                  <input type="text" name="q1_motivation_etc" class="text-input" placeholder="직접입력" oninput="document.getElementById('q1_etc_radio').checked = true;">
+                </div>
               </div>
             </div>
             <div class="scale-item">
@@ -1149,7 +1160,7 @@
   </form>
 </div>
 
-<!-- 커스텀 유효성 검사 모달 팝업 -->
+<!-- 커스텀 유효성 검사 / 오류 모달 팝업 (검증 실패, 제출 실패 공통 사용) -->
 <div id="validationAlertOverlay">
   <div class="custom-alert-box">
     <div class="custom-alert-icon">
@@ -1157,7 +1168,7 @@
         <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
       </svg>
     </div>
-    <p class="custom-alert-msg">응답하지 않은 문항이 있습니다!<br>확인부탁드립니다!</p>
+    <p class="custom-alert-msg" id="customAlertMsg">응답하지 않은 문항이 있습니다!<br>확인부탁드립니다!</p>
     <button type="button" class="custom-alert-btn" onclick="closeValidationAlert()">확인</button>
   </div>
 </div>
@@ -1184,9 +1195,20 @@
   const ribbonFill = document.getElementById('ribbonFill');
   const loading = document.getElementById('loading');
   const validationOverlay = document.getElementById('validationAlertOverlay');
+  const customAlertMsg = document.getElementById('customAlertMsg');
+
+  const DEFAULT_VALIDATION_MSG = '응답하지 않은 문항이 있습니다!<br>확인부탁드립니다!';
+
+  // 커스텀 모달 표시/숨김 (검증 실패, 제출 실패 등 공통으로 재사용)
+  function showCustomAlert(message) {
+    customAlertMsg.innerHTML = message;
+    validationOverlay.classList.add('active');
+  }
 
   function closeValidationAlert() {
     validationOverlay.classList.remove('active');
+    // 다음 번에는 기본 메시지로 복원
+    customAlertMsg.innerHTML = DEFAULT_VALIDATION_MSG;
   }
 
   document.querySelectorAll('.scale-dots[data-q]').forEach(group => {
@@ -1294,7 +1316,7 @@
       
       // 3. 미응답 항목 발견 시 처리
       if (!isAnswered) {
-        validationOverlay.classList.add('active');
+        showCustomAlert(DEFAULT_VALIDATION_MSG);
         item.scrollIntoView({ behavior: 'smooth', block: 'center' });
         
         const label = item.querySelector('.item-label');
@@ -1371,7 +1393,7 @@
         loading.style.display = 'none';
         bottomNav.classList.remove('hidden');
         nextBtn.disabled = false;
-        alert('제출 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+        showCustomAlert('제출 중 오류가 발생했습니다.<br>잠시 후 다시 시도해주세요.');
       });
   }
 </script>
