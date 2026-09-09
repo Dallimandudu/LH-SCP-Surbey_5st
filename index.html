@@ -77,15 +77,14 @@
     to{opacity:1; transform:translateY(0);}
   }
 
-  /* Intro Panel: 흰색 배경, 하늘색 테두리, 흰색 그림자 효과 노출 */
+  /* Intro Panel: 흰색 배경, 하늘색 테두리, 흰색 그림자 효과 */
   .intro-panel{
     position:relative;
     background: #ffffff;
-    border: 2px solid #bae6fd; /* 연한 하늘색 테두리 */
+    border: 2px solid #bae6fd; 
     border-radius: 20px;
     padding:60px 30px 50px;
     text-align:center;
-    /* 흰색 글로우(그림자) 효과와 깊이감을 주는 어두운 그림자 혼합 */
     box-shadow: 0 0 28px rgba(255, 255, 255, 0.4), 0 16px 40px rgba(0, 0, 0, 0.2);
   }
   
@@ -94,6 +93,9 @@
     margin: 0 auto 28px;
     display: flex;
     justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 42px; /* 방어 코드 */
   }
   .logo-wrap img {
     height: 42px; 
@@ -215,7 +217,6 @@
 
   .scale-dots{ display:flex; align-items:center; justify-content:space-between; gap:8px; }
   
-  /* 버튼 크기 축소 */
   .scale-btn{
     width:clamp(36px, 10vw, 48px); height:clamp(36px, 10vw, 48px);
     border-radius:50%; border:1.5px solid var(--line); background:#fff;
@@ -228,7 +229,6 @@
     box-shadow:0 6px 16px rgba(30,58,138,0.3); transform:scale(1.08);
   }
   
-  /* 3단 분리 캡션 스타일 (좌/중/우) */
   .scale-caption{
     display:grid; grid-template-columns: 1fr auto 1fr; align-items: start; margin-top:12px; gap:4px;
     font-family:var(--sans); font-size:12px; color:var(--ink-soft); font-weight:600;
@@ -257,7 +257,6 @@
   }
   .radio-group label:has(input:checked){border-color:var(--point); background:var(--point-soft); font-weight:600;}
 
-  /* Text Inputs: font-size 16px 적용하여 휴대폰 자동확대 방지 */
   .text-input{
     width:100%; padding:14px 16px; border:1.5px solid var(--line); border-radius:8px;
     background:#fff; font-family:var(--sans); font-size:16px; color:var(--ink);
@@ -304,21 +303,16 @@
     text-shadow: 0 2px 4px rgba(0,0,0,0.5);
   }
 
-  /* 삼성/애플 모바일 기기 완벽 대응 반응형 처리 */
   @media (max-width:600px){
     .stage{padding:16px 12px;}
     .movement{padding:32px 20px;}
     .intro-panel{padding:48px 20px 40px;}
-    
     .lockup-title-main { font-size: 28px; }
     .lockup-title-sub { font-size: 20px; }
-    
-    /* 모바일 환경에서도 3개 칸 나란히 배치 */
     .intro-meta { flex-direction: row; gap: 8px; }
     .intro-meta .meta-item { padding: 16px 4px; }
     .meta-num { font-size: 20px; }
     .meta-label { font-size: 12px; }
-    
     .radio-group label{padding:12px 14px;}
   }
 </style>
@@ -335,9 +329,9 @@
       <section class="slide" id="slide_intro">
         <div class="intro-panel">
           
-          <!-- 수정: 실제 파일명 반영 완료 -->
+          <!-- 수정: 새로운 파일명 반영 -->
           <div class="logo-wrap">
-            <img src="LH한국토지주택공사CI.png" alt="LH 한국토지주택공사">
+            <img src="./LH CI.png" alt="LH 한국토지주택공사">
           </div>
 
           <div class="lockup-text">
