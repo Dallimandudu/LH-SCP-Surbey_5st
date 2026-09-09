@@ -336,20 +336,27 @@
     text-shadow: 0 2px 4px rgba(0,0,0,0.5);
   }
 
-  /* 커스텀 유효성 검사 팝업 (흰색 + 귀여운 느낌) */
-  #customAlertOverlay {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
-    display: flex; align-items: center; justify-content: center; z-index: 9999;
+  /* 👉 수정 완료: 커스텀 유효성 검사 모달 팝업 위치 및 UI 수정 */
+  #validationAlertOverlay {
+    position: fixed; 
+    top: 0; left: 0; right: 0; bottom: 0; /* 화면 가득 채우기 */
+    background: rgba(0,0,0,0.5); 
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: flex; 
+    align-items: center; 
+    justify-content: center; /* 화면 정중앙 배치 */
+    z-index: 9999;
     opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
   }
-  #customAlertOverlay.active { opacity: 1; pointer-events: auto; }
+  #validationAlertOverlay.active { opacity: 1; pointer-events: auto; }
+  
   .custom-alert-box {
     background: #fff; padding: 36px 24px 30px; border-radius: 20px; width: 85%; max-width: 320px; text-align: center;
     box-shadow: 0 24px 48px rgba(0,0,0,0.2); transform: translateY(20px); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
-  #customAlertOverlay.active .custom-alert-box { transform: translateY(0); }
+  #validationAlertOverlay.active .custom-alert-box { transform: translateY(0); }
   
-  /* 귀여운 아이콘 컨테이너 */
   .custom-alert-icon { 
     margin: 0 auto 16px; width: 54px; height: 54px; background: #ffe4e6; 
     border-radius: 50%; display: flex; align-items: center; justify-content: center; 
@@ -1129,7 +1136,7 @@
   </form>
 </div>
 
-<!-- 커스텀 유효성 검사 모달 팝업 -->
+<!-- 👉 수정 완료: 화면 전체를 덮도록 고정 위치(fixed, 0) 설정 -->
 <div id="validationAlertOverlay">
   <div class="custom-alert-box">
     <div class="custom-alert-icon">
@@ -1245,7 +1252,7 @@
     window.scrollTo({top:0, behavior:'auto'});
   }
 
-  // 👉 현재 슬라이드의 객관식 문항 유효성 검사
+  // 객관식 문항 유효성 검사
   function validateCurrentSlide() {
     const currentSlide = activeSlides[currentIndex];
     const questionItems = currentSlide.querySelectorAll('.scale-item');
@@ -1273,32 +1280,27 @@
         }
       }
       
-      // 3. 미응답 항목 발견 시 처리 (커스텀 팝업 띄우기)
+      // 3. 미응답 항목 발견 시 처리
       if (!isAnswered) {
-        // 커스텀 팝업 활성화
         validationOverlay.classList.add('active');
-        
-        // 해당 문항 위치로 부드럽게 스크롤 이동
         item.scrollIntoView({ behavior: 'smooth', block: 'center' });
         
-        // 시각적 강조 효과 (흔들림 + 붉은색)
         const label = item.querySelector('.item-label');
         if(label) {
           label.classList.add('error-shake');
           setTimeout(() => label.classList.remove('error-shake'), 1000);
         }
-        
-        return false; // 검사 실패, 다음 화면으로 안 넘어감
+        return false; 
       }
     }
-    return true; // 모두 응답함
+    return true; 
   }
 
   nextBtn.addEventListener('click', () => {
-    // 💡 다음/제출 버튼 누를 때 유효성 검사 실행
+    // 다음/제출 버튼 누를 때 유효성 검사 실행
     if (currentIndex > 0 && currentIndex < activeSlides.length - 1) {
       if (!validateCurrentSlide()) {
-        return; // 미응답 항목이 있으면 이동 중단
+        return; 
       }
     }
 
