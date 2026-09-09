@@ -166,8 +166,12 @@
     display: flex; flex-direction: column; gap: 14px; margin-top: 20px;
   }
 
-  /* 버튼: 투명한 글래스모피즘 + 연한 하늘색 터치 */
+  /* 버튼: 투명한 글래스모피즘 + 연한 하늘색 터치 + 아이콘 Flex 정렬 */
   .course-select-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* 아이콘과 텍스트 사이 간격 */
     font-family: var(--sans);
     font-weight: 700; font-size: 16px;
     padding: 18px 20px;
@@ -181,10 +185,23 @@
     cursor: pointer;
     transition: all 0.3s ease;
   }
+  
+  .course-select-btn svg {
+    width: 22px;
+    height: 22px;
+    stroke-width: 2.2px;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* 귀여운 튕김 애니메이션 */
+  }
+
   .course-select-btn:hover {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.7) 0%, rgba(224, 242, 254, 0.6) 100%);
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(186, 230, 253, 0.4), inset 0 1px 0 rgba(255, 255, 255, 1);
+  }
+  
+  /* 마우스 오버 시 아이콘 귀엽게 까딱이는 효과 */
+  .course-select-btn:hover svg {
+    transform: scale(1.15) rotate(-8deg);
   }
 
   /* 일반 설문 패널 */
@@ -259,7 +276,6 @@
   }
   .radio-group label:has(input:checked){border-color:var(--point); background:var(--point-soft); font-weight:600;}
 
-  /* Text Inputs: font-size 16px 적용하여 휴대폰 자동확대 방지 */
   .text-input{
     width:100%; padding:14px 16px; border:1.5px solid var(--line); border-radius:8px;
     background:#fff; font-family:var(--sans); font-size:16px; color:var(--ink);
@@ -311,10 +327,7 @@
     .stage{padding:16px 12px;}
     .movement{padding:32px 20px;}
     .intro-panel{padding:48px 20px 40px;}
-    
-    /* 모바일 환경에서도 로고 사이즈 확대 적용 유지 */
     .logo-wrap img { height: 56px; } 
-
     .lockup-title-main { font-size: 28px; }
     .lockup-title-sub { font-size: 20px; }
     .intro-meta { flex-direction: row; gap: 8px; }
@@ -376,8 +389,20 @@
           </div>
 
           <div class="course-select-group">
-            <button type="button" class="course-select-btn" onclick="startSurvey('day1')">1일차 설문조사하기</button>
-            <button type="button" class="course-select-btn" onclick="startSurvey('day23')">2~3일차 설문조사하기</button>
+            <button type="button" class="course-select-btn" onclick="startSurvey('day1')">
+              <!-- 귀여운 설문 모양 아이콘 -->
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+              </svg>
+              1일차 설문조사하기
+            </button>
+            <button type="button" class="course-select-btn" onclick="startSurvey('day23')">
+              <!-- 귀여운 설문 모양 아이콘 -->
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
+              </svg>
+              2~3일차 설문조사하기
+            </button>
           </div>
         </div>
       </section>
@@ -829,7 +854,7 @@
                 <button type="button" class="scale-btn" value="5">5</button>
               </div>
               <div class="scale-caption">
-                <span class="cap-left">매우 부실하였다</span>
+                <span class="cap-left">매 부실하였다</span>
                 <span class="cap-center">보통이다</span>
                 <span class="cap-right">매우 충실하였다</span>
               </div>
