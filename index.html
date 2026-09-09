@@ -86,7 +86,7 @@
   }
   .error-shake {
     animation: shake 0.4s ease-in-out;
-    color: #e11d48 !important; /* 눈에 띄는 붉은색 */
+    color: #e11d48 !important; 
     transition: color 0.3s;
   }
 
@@ -335,6 +335,36 @@
     font-family:var(--sans); font-size:15px; color:#fff; font-weight:700; display:none; z-index: 1000;
     text-shadow: 0 2px 4px rgba(0,0,0,0.5);
   }
+
+  /* 커스텀 유효성 검사 팝업 (흰색 + 귀여운 느낌) */
+  #customAlertOverlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+    display: flex; align-items: center; justify-content: center; z-index: 9999;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
+  }
+  #customAlertOverlay.active { opacity: 1; pointer-events: auto; }
+  .custom-alert-box {
+    background: #fff; padding: 36px 24px 30px; border-radius: 20px; width: 85%; max-width: 320px; text-align: center;
+    box-shadow: 0 24px 48px rgba(0,0,0,0.2); transform: translateY(20px); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  #customAlertOverlay.active .custom-alert-box { transform: translateY(0); }
+  
+  /* 귀여운 아이콘 컨테이너 */
+  .custom-alert-icon { 
+    margin: 0 auto 16px; width: 54px; height: 54px; background: #ffe4e6; 
+    border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+  }
+  .custom-alert-icon svg { width: 30px; height: 30px; }
+  
+  .custom-alert-msg { 
+    font-family: var(--sans); font-size: 16px; color: var(--ink); line-height: 1.6; 
+    font-weight: 700; margin: 0 0 26px; word-break: keep-all; letter-spacing: 0.01em; 
+  }
+  .custom-alert-btn {
+    width: 100%; padding: 14px; border-radius: 12px; background: var(--navy); color: #fff;
+    font-family: var(--sans); font-weight: 700; font-size: 16px; border: none; cursor: pointer; transition: all 0.2s;
+  }
+  .custom-alert-btn:hover { background: #172554; }
 
   @media (max-width:600px){
     .stage{padding:16px 12px;}
@@ -1099,6 +1129,20 @@
   </form>
 </div>
 
+<!-- 커스텀 유효성 검사 모달 팝업 -->
+<div id="validationAlertOverlay">
+  <div class="custom-alert-box">
+    <div class="custom-alert-icon">
+      <!-- 붉은색 파스텔톤 느낌표 일러스트 -->
+      <svg fill="none" stroke="#e11d48" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+      </svg>
+    </div>
+    <p class="custom-alert-msg">응답하지 않은 문항이 있습니다!<br>확인부탁드립니다!</p>
+    <button type="button" class="custom-alert-btn" onclick="closeValidationAlert()">확인</button>
+  </div>
+</div>
+
 <div id="loading">제출 중입니다. 잠시만 기다려주세요...</div>
 
 <div class="bottom-nav hidden" id="bottomNav">
@@ -1120,6 +1164,11 @@
   const bottomNav = document.getElementById('bottomNav');
   const ribbonFill = document.getElementById('ribbonFill');
   const loading = document.getElementById('loading');
+  const validationOverlay = document.getElementById('validationAlertOverlay');
+
+  function closeValidationAlert() {
+    validationOverlay.classList.remove('active');
+  }
 
   document.querySelectorAll('.scale-dots[data-q]').forEach(group => {
     const buttons = group.querySelectorAll('.scale-btn');
@@ -1196,7 +1245,7 @@
     window.scrollTo({top:0, behavior:'auto'});
   }
 
-  // 👉 핵심 추가 기능: 현재 슬라이드의 객관식 문항 유효성 검사
+  // 👉 현재 슬라이드의 객관식 문항 유효성 검사
   function validateCurrentSlide() {
     const currentSlide = activeSlides[currentIndex];
     const questionItems = currentSlide.querySelectorAll('.scale-item');
@@ -1224,9 +1273,10 @@
         }
       }
       
-      // 3. 미응답 항목 발견 시 처리
+      // 3. 미응답 항목 발견 시 처리 (커스텀 팝업 띄우기)
       if (!isAnswered) {
-        alert('응답하지 않은 객관식 문항이 있습니다. 확인해주세요.');
+        // 커스텀 팝업 활성화
+        validationOverlay.classList.add('active');
         
         // 해당 문항 위치로 부드럽게 스크롤 이동
         item.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -1245,10 +1295,10 @@
   }
 
   nextBtn.addEventListener('click', () => {
-    // 💡 다음/제출 버튼 누를 때 유효성 검사 함수 실행
+    // 💡 다음/제출 버튼 누를 때 유효성 검사 실행
     if (currentIndex > 0 && currentIndex < activeSlides.length - 1) {
       if (!validateCurrentSlide()) {
-        return; // 검사 통과 못하면 중단
+        return; // 미응답 항목이 있으면 이동 중단
       }
     }
 
