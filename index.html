@@ -49,8 +49,6 @@
     *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
   }
 
-  .phrase { display: inline-block; }
-
   #ribbonTrack{
     position:fixed; top:0; left:0; right:0; height:4px; z-index:100;
     background:rgba(255, 255, 255, 0.2);
@@ -150,11 +148,24 @@
     letter-spacing: 0.01em;
   }
 
+  /* 👉 수정 완료: 안내글 모바일 가독성 및 줄바꿈 최적화 */
   .intro-body{
     font-family: var(--sans);
-    font-size: 15px; font-weight: 500; color: #334155; line-height: 1.8;
-    max-width: 100%; margin: 0 auto 36px; text-align: center;
+    font-size: 15px; 
+    font-weight: 500; 
+    color: #334155; 
+    line-height: 1.65;
+    max-width: 100%; 
+    margin: 0 auto 36px; 
+    text-align: center;
     letter-spacing: 0.02em;
+    word-break: keep-all; /* 단어 단위로 깔끔하게 끊어지도록 설정 */
+  }
+  .intro-body p {
+    margin: 0 0 16px 0;
+  }
+  .intro-body p:last-child {
+    margin: 0;
   }
   
   .intro-meta{
@@ -303,7 +314,13 @@
     background:var(--navy); color:#fff; display:flex; align-items:center; justify-content:center; font-size:24px;
   }
   .thankyou h2{font-family:var(--sans); font-size:26px; font-weight:700; margin:0 0 16px; color:var(--navy-deep); letter-spacing:-0.01em;}
-  .thankyou p{font-family:var(--sans); font-size:15px; color:var(--ink-soft); line-height:1.8; max-width:380px; margin:0 auto; word-break:keep-all; letter-spacing: 0.01em;}
+  
+  /* 👉 완료 화면 텍스트도 깔끔하게 줄바꿈되도록 수정 */
+  .thankyou p{
+    font-family:var(--sans); font-size:15px; color:var(--ink-soft); 
+    line-height:1.65; max-width:380px; margin:0 auto; 
+    word-break:keep-all; letter-spacing: 0.01em;
+  }
 
   .bottom-nav{
     position:fixed; left:0; right:0; bottom:0; height:var(--nav-h);
@@ -336,16 +353,16 @@
     text-shadow: 0 2px 4px rgba(0,0,0,0.5);
   }
 
-  /* 👉 수정 완료: 커스텀 유효성 검사 모달 팝업 위치 및 UI 수정 */
+  /* 커스텀 유효성 검사 팝업 (중앙 고정) */
   #validationAlertOverlay {
     position: fixed; 
-    top: 0; left: 0; right: 0; bottom: 0; /* 화면 가득 채우기 */
+    inset: 0;
     background: rgba(0,0,0,0.5); 
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     display: flex; 
     align-items: center; 
-    justify-content: center; /* 화면 정중앙 배치 */
+    justify-content: center; 
     z-index: 9999;
     opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
   }
@@ -412,15 +429,11 @@
           <div class="intro-sub-title">교육 만족도 설문조사</div>
           <div class="rule"></div>
           
+          <!-- 👉 수정 완료: p태그 적용 및 구조 단순화로 줄바꿈 완벽 해결 -->
           <div class="intro-body">
-            <span class="phrase">본 설문조사는 「2026년도 SCP과정 교육운영」을 위해</span> 
-            <span class="phrase">교육에 참여하신 직원분들의 의견을 반영하여</span> 
-            <span class="phrase">보다 실효성 있는 교육을 시행하고자 인재개발원에서 실시하는 조사입니다.</span>
-            <br><br>
-            <span class="phrase">따라서 교육을 받으시면서 느꼈던 점,</span> 
-            <span class="phrase">향후 개선해야 하는 점 등을 솔직하게 답변 해주시기 바랍니다.</span>
-            <br><br>
-            <span class="phrase">바쁘신 와중에 아래 설문조사에 시간을 할애 해주셔서 감사드립니다.</span>
+            <p>본 설문조사는 「2026년도 SCP과정 교육운영」을 위해 교육에 참여하신 직원분들의 의견을 반영하여 보다 실효성 있는 교육을 시행하고자 인재개발원에서 실시하는 조사입니다.</p>
+            <p>따라서 교육을 받으시면서 느꼈던 점, 향후 개선해야 하는 점 등을 솔직하게 답변 해주시기 바랍니다.</p>
+            <p>바쁘신 와중에 아래 설문조사에 시간을 할애 해주셔서 감사드립니다.</p>
           </div>
 
           <div class="intro-meta">
@@ -1136,11 +1149,10 @@
   </form>
 </div>
 
-<!-- 👉 수정 완료: 화면 전체를 덮도록 고정 위치(fixed, 0) 설정 -->
+<!-- 커스텀 유효성 검사 모달 팝업 -->
 <div id="validationAlertOverlay">
   <div class="custom-alert-box">
     <div class="custom-alert-icon">
-      <!-- 붉은색 파스텔톤 느낌표 일러스트 -->
       <svg fill="none" stroke="#e11d48" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
       </svg>
