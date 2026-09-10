@@ -37,6 +37,7 @@
     font-family:var(--sans);
     color:var(--ink);
     letter-spacing: 0.01em; 
+    /* 아주 진한 네이비색 그라데이션 배경 유지 */
     background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e3a8a 100%);
     background-attachment: fixed;
     min-height:100vh;
@@ -185,25 +186,25 @@
   }
   .meta-label{font-size:12px; color:var(--ink-soft); font-weight:600;}
 
-  /* 👉 수정: 3개 버튼을 가로로 꽉 차게 배치하는 Grid 시스템 적용 */
+  /* 3개 버튼 가로 배치 Grid */
   .course-select-group {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3칸 균등 분할 */
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px; 
     margin-top: 20px;
   }
 
-  /* 👉 수정: 정사각형(1:1 비율) 글래스모피즘 버튼 디자인 */
+  /* 👉 수정: 텍스트 크기 확대 및 일러스트 이미지 적용을 위한 스타일 */
   .course-select-btn {
     display: flex;
-    flex-direction: column; /* 아이콘 위, 텍스트 아래 */
+    flex-direction: column; 
     align-items: center;
     justify-content: center;
     gap: 10px; 
-    aspect-ratio: 1 / 1; /* 완벽한 정사각형 비율 유지 */
+    aspect-ratio: 1 / 1; 
     font-family: var(--sans);
     font-weight: 700; 
-    font-size: 14px;
+    font-size: 18px; /* 폰트 사이즈 대폭 확대 */
     padding: 10px 8px;
     border: 1px solid rgba(255, 255, 255, 0.8);
     border-radius: 16px;
@@ -219,10 +220,11 @@
     word-break: keep-all;
   }
   
-  .course-select-btn svg {
-    width: 28px;
-    height: 28px;
-    stroke-width: 2px;
+  /* 일러스트 이미지 크기 및 애니메이션 */
+  .course-select-btn img {
+    width: 36px;
+    height: 36px;
+    object-fit: contain;
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
   }
 
@@ -232,7 +234,7 @@
     box-shadow: 0 8px 24px rgba(186, 230, 253, 0.4), inset 0 1px 0 rgba(255, 255, 255, 1);
   }
   
-  .course-select-btn:hover svg {
+  .course-select-btn:hover img {
     transform: scale(1.15) rotate(-8deg);
   }
 
@@ -287,14 +289,21 @@
   .cap-center { text-align: center; color: #94a3b8; }
   .cap-right { text-align: right; word-break: keep-all; }
 
+  /* 👉 수정: 라디오 버튼(나이 선택 등) 무조건 2열 Grid로 고정하여 크기 완벽 통일 */
   .radio-group{display:flex; flex-direction:column; gap:10px;}
-  .radio-group.row-layout{flex-direction:row; flex-wrap:wrap;}
+  .radio-group.row-layout {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 무조건 2칸씩 균일하게 분할 */
+    gap: 10px;
+  }
   .radio-group label{
     display:flex; align-items:center; gap:12px; padding:12px 16px;
     border:1.5px solid var(--line); background:#fff; border-radius:8px; cursor:pointer;
     font-family:var(--sans); font-size:16px; 
     line-height:1.4; transition:border-color .2s, background .2s;
-    word-break: keep-all; flex:1; min-width: 120px; min-height: 48px;
+    word-break: keep-all; 
+    margin: 0; /* 기존 여백 리셋 */
+    height: 100%; /* Grid 안에서 높이 꽉 채우기 */
     letter-spacing: 0.01em;
   }
   .radio-group label:hover{border-color:var(--point); background:var(--point-soft);}
@@ -409,12 +418,12 @@
     .meta-num { font-size: 18px; }
     .meta-label { font-size: 11px; }
     
-    /* 모바일 정사각형 버튼 텍스트/아이콘 크기 미세조정 */
+    /* 모바일 버튼 크기 세팅 */
     .course-select-group { gap: 8px; }
-    .course-select-btn { font-size: 12px; padding: 10px 4px; border-radius: 12px; }
-    .course-select-btn svg { width: 24px; height: 24px; margin-bottom: 2px;}
+    .course-select-btn { font-size: 15px; padding: 12px 4px; border-radius: 12px; }
+    .course-select-btn img { width: 32px; height: 32px; margin-bottom: 2px;}
     
-    .radio-group label{padding:12px 14px;}
+    .radio-group label{padding:12px 14px; font-size: 14px;}
   }
 </style>
 </head>
@@ -463,25 +472,18 @@
             </div>
           </div>
 
-          <!-- 👉 수정 완료: 정사각형 3개 버튼 나란히 배치 -->
+          <!-- 👉 수정 완료: 텍스트 확대 및 <img> 태그 적용 -->
           <div class="course-select-group">
             <button type="button" class="course-select-btn" onclick="startSurvey('day1')">
-              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
-              </svg>
+              <img src="./survey_icon.png" alt="아이콘">
               1일차<br>설문조사하기
             </button>
             <button type="button" class="course-select-btn" onclick="startSurvey('day23')">
-              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
-              </svg>
+              <img src="./survey_icon.png" alt="아이콘">
               2~3일차<br>설문조사하기
             </button>
             <button type="button" class="course-select-btn" onclick="startSurvey('post')">
-              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <!-- 문서/체크리스트 형태의 새로운 아이콘 -->
-                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-              </svg>
+              <img src="./survey_icon.png" alt="아이콘">
               SCP 사후진단<br>진행하기
             </button>
           </div>
@@ -495,13 +497,16 @@
           <div class="scale-block">
             <div class="scale-item">
               <p class="item-label">1. 본 교육과정에 대한 귀하의 가장 큰 학습 참여동기는 무엇입니까?</p>
-              <div class="radio-group">
+              <div class="radio-group row-layout">
                 <label><input type="radio" name="q1_motivation" value="역량향상"> 역량향상</label>
                 <label><input type="radio" name="q1_motivation" value="상사 및 동료의 추천"> 상사 및 동료의 추천</label>
                 <label><input type="radio" name="q1_motivation" value="강제참석(필수이수 등)"> 강제참석(필수이수 등)</label>
                 <label><input type="radio" name="q1_motivation" value="자기계발"> 자기계발</label>
-                <label><input type="radio" name="q1_motivation" value="기타"> 기타 <input type="text" name="q1_motivation_etc" class="text-input" style="width: auto; padding: 4px 8px; margin-top:0;" placeholder="직접입력"></label>
               </div>
+              <label style="display:flex; align-items:center; gap:12px; margin-top:10px; padding:12px 16px; border:1.5px solid var(--line); border-radius:8px; background:#fff; cursor:pointer;">
+                <input type="radio" name="q1_motivation" value="기타" style="appearance:none; width:20px; height:20px; border-radius:50%; border:2px solid var(--line); position:relative; flex:none; transition:border-color .2s;"> 
+                기타 <input type="text" name="q1_motivation_etc" class="text-input" style="width: auto; padding: 4px 8px; margin-top:0;" placeholder="직접입력">
+              </label>
             </div>
             <div class="scale-item">
               <p class="item-label">2. 본 교육과정은 귀하의 교육니즈를 반영하고 있습니까?</p>
@@ -1128,6 +1133,7 @@
             </div>
             <div class="scale-item">
               <p class="item-label">20. 귀하의 나이(만 나이)를 선택해주세요.</p>
+              <!-- 👉 수정 완료: Grid로 2열 배치되어 모든 버튼 크기 통일 -->
               <div class="radio-group row-layout">
                 <label><input type="radio" name="q20_age" value="25세 이하"> ~25세 이하</label>
                 <label><input type="radio" name="q20_age" value="26~30세"> 26~30세</label>
@@ -1232,12 +1238,11 @@
     });
   });
 
-  // 👉 추가: 사후 진단 버튼을 위한 라우팅 로직 연동
   function buildActiveSlides(type) {
     if (type === 'day1') {
       activeSlides = allSlides.filter(s => {
         const id = s.id;
-        return id === 'slide_intro' || id === 'slide_14' || id === 'slide_15' || id === 'slide_thankyou';
+        return id === 'slide_intro' || id === 'slide_14' || id === 'slide_15' || id === 'slide_9' || id === 'slide_thankyou';
       });
     } else if (type === 'day23') {
       activeSlides = allSlides.filter(s => {
