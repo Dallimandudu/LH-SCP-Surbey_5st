@@ -1003,7 +1003,7 @@
                 <button type="button" class="scale-btn" value="5">5</button>
               </div>
               <div class="scale-caption">
-                <span class="cap-left">매우 좋지 않다</span>
+                <span class="cap-left">매 부 좋지 않다</span>
                 <span class="cap-center">보통이다</span>
                 <span class="cap-right">매우 좋다</span>
               </div>
@@ -1174,14 +1174,20 @@
         </div>
       </section>
 
-      <!-- ★수정됨: 사후진단 1/4 (인적사항 전용 화면) -->
+      <!-- ★수정됨: 사후진단 1/4 (인적사항 전용 화면 - 가운데 문구 강조) -->
       <section class="slide" id="slide_post_1">
         <div class="movement">
           <div class="m-head"><span class="m-num">01</span><span class="m-tag">자기관리 역량강화 사후진단 (1/4)</span><span class="m-rule"></span></div>
           
           <div style="padding: 24px; background: #f1f5f9; border-radius: 12px; margin-bottom: 32px; font-size: 14.5px; line-height: 1.7; color: #334155; word-break: keep-all; box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);">
             안녕하세요. 본 설문은 교육 프로그램 참여 이전 업무역량, 자기 이해 및 재무관리 역량에 대한 이해도, 업무 몰입 및 정서적 변화 등에 대한 경험을 확인하기 위한 사후 조사입니다.<br><br>
-            응답해주신 내용은 교육 효과 분석 및 향후 프로그램 개선을 위한 기초자료로만 활용되며, 정답이 있는 문항이 아니므로 편하게 응답해주시면 됩니다. 바쁘시겠지만 보다 나은 교육을 위해 성실한 응답 부탁드립니다. 감사합니다.
+            
+            <!-- 강조된 문구 적용 -->
+            <span style="font-size: 16px; font-weight: 800; color: var(--navy-deep);">
+            응답해주신 내용은 교육 효과 분석 및 향후 프로그램 개선을 위한 기초자료로만 활용되며, 정답이 있는 문항이 아니므로 편하게 응답해주시면 됩니다.
+            </span><br><br>
+            
+            바쁘시겠지만 보다 나은 교육을 위해 성실한 응답 부탁드립니다. 감사합니다.
           </div>
 
           <div class="scale-block">
@@ -1197,7 +1203,7 @@
         </div>
       </section>
 
-      <!-- ★수정됨: 사후진단 2/4 (문항 1~3) -->
+      <!-- 사후진단 2/4 (문항 1~3) -->
       <section class="slide" id="slide_post_2">
         <div class="movement">
           <div class="m-head"><span class="m-num">02</span><span class="m-tag">자기관리 역량강화 사후진단 (2/4)</span><span class="m-rule"></span></div>
@@ -1254,7 +1260,7 @@
         </div>
       </section>
 
-      <!-- ★수정됨: 사후진단 3/4 (문항 4~6) -->
+      <!-- 사후진단 3/4 (문항 4~6) -->
       <section class="slide" id="slide_post_3">
         <div class="movement">
           <div class="m-head"><span class="m-num">03</span><span class="m-tag">자기관리 역량강화 사후진단 (3/4)</span><span class="m-rule"></span></div>
@@ -1311,7 +1317,7 @@
         </div>
       </section>
 
-      <!-- ★수정됨: 사후진단 4/4 (문항 7~9) -->
+      <!-- 사후진단 4/4 (문항 7~9) -->
       <section class="slide" id="slide_post_4">
         <div class="movement">
           <div class="m-head"><span class="m-num">04</span><span class="m-tag">자기관리 역량강화 사후진단 (4/4)</span><span class="m-rule"></span></div>
@@ -1447,7 +1453,6 @@
         return id !== 'slide_14' && id !== 'slide_15' && !id.startsWith('slide_post_');
       });
     } else if (type === 'post') {
-      // 4개의 페이지로 나뉜 사후진단 슬라이드를 모두 포함합니다.
       activeSlides = allSlides.filter(s => {
         const id = s.id;
         return id === 'slide_intro' || id === 'slide_post_1' || id === 'slide_post_2' || id === 'slide_post_3' || id === 'slide_post_4' || id === 'slide_thankyou';
@@ -1529,7 +1534,6 @@
         }
       }
 
-      // 사후진단 등에서 텍스트 입력 필수('.required') 검사
       const requiredTextInput = item.querySelector('.text-input.required');
       if (requiredTextInput) {
         if (!requiredTextInput.value.trim()) isAnswered = false;
