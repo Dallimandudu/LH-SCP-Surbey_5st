@@ -502,7 +502,6 @@
         </div>
       </section>
 
-      <!-- 일반 설문 영역 (Slide 1 ~ 9) 은 기존과 동일하게 유지 -->
       <!-- Slide 1 -->
       <section class="slide" id="slide_1">
         <div class="movement">
@@ -827,7 +826,7 @@
               <div class="scale-caption">
                 <span class="cap-left">매우 불만족한다</span>
                 <span class="cap-center">보통이다</span>
-                <span class="cap-right">매우 만족한다</span>
+                <span class="cap-right">매 만족한다</span>
               </div>
               <input type="hidden" name="q14_5">
             </div>
@@ -1441,7 +1440,6 @@
     } else if (type === 'post') {
       activeSlides = allSlides.filter(s => {
         const id = s.id;
-        // 기존 placeholder 대신 실제 생성한 사후진단 슬라이드 3장을 호출합니다.
         return id === 'slide_intro' || id === 'slide_post_1' || id === 'slide_post_2' || id === 'slide_post_3' || id === 'slide_thankyou';
       });
     } else {
@@ -1521,7 +1519,6 @@
         }
       }
 
-      // 사후진단의 필수 텍스트 필드 (소속, 이름 등) 유효성 검사 추가
       const requiredTextInput = item.querySelector('.text-input.required');
       if (requiredTextInput) {
         if (!requiredTextInput.value.trim()) isAnswered = false;
@@ -1586,7 +1583,8 @@
     bottomNav.classList.add('hidden');
     loading.style.display = 'block';
 
-    const scriptURL = 'https://script.google.com/macros/s/AKfycby9PJNzrXKKN2MsQcQ8QwP4knwfyB08fyz0Jg78p15jJItCiMmgr6NHalvPm_oNzWcA/exec'; 
+    // 전달해주신 배포 웹 앱 URL을 여기에 적용했습니다.
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxWBpbU0NcraO1D-B02AiXNmWkuCQACifpISMisUTd3xUc1Whop_xHFfg4f0zOaDdfPjw/exec'; 
     
     const formData = new FormData(form);
     
