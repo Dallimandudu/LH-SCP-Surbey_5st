@@ -37,7 +37,6 @@
     font-family:var(--sans);
     color:var(--ink);
     letter-spacing: 0.01em; 
-    /* 아주 진한 네이비색 그라데이션 배경 유지 */
     background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #1e3a8a 100%);
     background-attachment: fixed;
     min-height:100vh;
@@ -48,6 +47,8 @@
   @media (prefers-reduced-motion: reduce){
     *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important;}
   }
+
+  .phrase { display: inline-block; }
 
   #ribbonTrack{
     position:fixed; top:0; left:0; right:0; height:4px; z-index:100;
@@ -94,14 +95,13 @@
     background: #ffffff;
     border: 2px solid #bae6fd; 
     border-radius: 20px;
-    padding:60px 30px 50px;
+    padding:50px 26px 40px;
     text-align:center;
     box-shadow: 0 0 28px rgba(255, 255, 255, 0.4), 0 16px 40px rgba(0, 0, 0, 0.2);
   }
   
-  /* 로고 컨테이너 */
   .logo-wrap {
-    margin: 0 auto 28px;
+    margin: 0 auto 24px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -114,11 +114,11 @@
     object-fit: contain;
   }
 
-  .lockup-text{ margin:0 auto 30px; }
+  .lockup-text{ margin:0 auto 24px; }
   .lockup-title-main {
     font-family: var(--serif-kr);
     font-weight: 900;
-    font-size: clamp(32px, 8vw, 42px);
+    font-size: clamp(28px, 8vw, 38px);
     color: var(--navy-deep);
     line-height: 1.1;
     letter-spacing: 0.02em;
@@ -127,7 +127,7 @@
     font-family: var(--serif-en);
     font-style: italic;
     font-weight: 600;
-    font-size: clamp(22px, 5.5vw, 28px);
+    font-size: clamp(20px, 5.5vw, 24px);
     color: var(--navy);
     line-height: 1.3;
     margin-top: 8px;
@@ -135,71 +135,78 @@
   }
   
   .rule{
-    width:56px; height:2px; margin:28px auto;
+    width:56px; height:2px; margin:24px auto;
     background:linear-gradient(90deg, transparent, var(--navy), transparent);
   }
   
   .intro-sub-title {
     font-family: var(--sans);
     font-weight: 700;
-    font-size: 22px;
+    font-size: 20px;
     color: var(--navy-deep);
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     letter-spacing: 0.01em;
   }
 
-  /* 👉 수정 완료: 안내글 모바일 가독성 및 줄바꿈 최적화 */
   .intro-body{
     font-family: var(--sans);
-    font-size: 15px; 
+    font-size: 14px; 
     font-weight: 500; 
     color: #334155; 
     line-height: 1.65;
     max-width: 100%; 
-    margin: 0 auto 36px; 
+    margin: 0 auto 28px; 
     text-align: center;
     letter-spacing: 0.02em;
-    word-break: keep-all; /* 단어 단위로 깔끔하게 끊어지도록 설정 */
+    word-break: keep-all; 
   }
   .intro-body p {
-    margin: 0 0 16px 0;
+    margin: 0 0 12px 0;
   }
   .intro-body p:last-child {
     margin: 0;
   }
   
   .intro-meta{
-    display:flex; justify-content:center; align-items: stretch; gap: 10px;
-    margin:0 auto 36px; max-width:500px;
+    display:flex; justify-content:center; align-items: stretch; gap: 8px;
+    margin:0 auto 28px; max-width:500px;
   }
   .intro-meta .meta-item{
-    flex: 1; text-align: center; padding: 18px 8px;
+    flex: 1; text-align: center; padding: 14px 6px;
     background: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0.05);
-    border-radius: 14px;
+    border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.04);
   }
   
   .meta-num{
-    font-family:var(--sans); font-size:22px; font-weight:800; color:var(--navy);
-    display:block; margin-bottom:6px; letter-spacing:0.02em;
+    font-family:var(--sans); font-size:20px; font-weight:800; color:var(--navy);
+    display:block; margin-bottom:4px; letter-spacing:0.02em;
   }
-  .meta-label{font-size:13px; color:var(--ink-soft); font-weight:600;}
+  .meta-label{font-size:12px; color:var(--ink-soft); font-weight:600;}
 
+  /* 👉 수정: 3개 버튼을 가로로 꽉 차게 배치하는 Grid 시스템 적용 */
   .course-select-group {
-    display: flex; flex-direction: column; gap: 14px; margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3칸 균등 분할 */
+    gap: 10px; 
+    margin-top: 20px;
   }
 
+  /* 👉 수정: 정사각형(1:1 비율) 글래스모피즘 버튼 디자인 */
   .course-select-btn {
     display: flex;
+    flex-direction: column; /* 아이콘 위, 텍스트 아래 */
     align-items: center;
     justify-content: center;
     gap: 10px; 
+    aspect-ratio: 1 / 1; /* 완벽한 정사각형 비율 유지 */
     font-family: var(--sans);
-    font-weight: 700; font-size: 16px;
-    padding: 18px 20px;
+    font-weight: 700; 
+    font-size: 14px;
+    padding: 10px 8px;
     border: 1px solid rgba(255, 255, 255, 0.8);
-    border-radius: 14px;
+    border-radius: 16px;
     background: linear-gradient(135deg, rgba(224, 242, 254, 0.45) 0%, rgba(255, 255, 255, 0.15) 100%);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -207,13 +214,15 @@
     box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.6);
     cursor: pointer;
     transition: all 0.3s ease;
-    letter-spacing: 0.02em;
+    letter-spacing: -0.01em;
+    line-height: 1.35;
+    word-break: keep-all;
   }
   
   .course-select-btn svg {
-    width: 22px;
-    height: 22px;
-    stroke-width: 2.2px;
+    width: 28px;
+    height: 28px;
+    stroke-width: 2px;
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
   }
 
@@ -299,13 +308,6 @@
   }
   .radio-group label:has(input:checked){border-color:var(--point); background:var(--point-soft); font-weight:600;}
 
-  /* 기타 항목의 라디오 + 직접입력 텍스트 필드를 담는 래퍼 (라디오 토글 오작동 방지용 구조) */
-  .etc-option-row{
-    display:flex; align-items:center; gap:10px; flex:1; min-width: 120px;
-  }
-  .etc-option-row > label{ flex:none; min-width:auto; }
-  .etc-option-row > .text-input{ margin-top:0; flex:1; min-width:0; }
-
   .text-input{
     width:100%; padding:14px 16px; border:1.5px solid var(--line); border-radius:8px;
     background:#fff; font-family:var(--sans); font-size:16px; color:var(--ink);
@@ -321,8 +323,6 @@
     background:var(--navy); color:#fff; display:flex; align-items:center; justify-content:center; font-size:24px;
   }
   .thankyou h2{font-family:var(--sans); font-size:26px; font-weight:700; margin:0 0 16px; color:var(--navy-deep); letter-spacing:-0.01em;}
-  
-  /* 👉 완료 화면 텍스트도 깔끔하게 줄바꿈되도록 수정 */
   .thankyou p{
     font-family:var(--sans); font-size:15px; color:var(--ink-soft); 
     line-height:1.65; max-width:380px; margin:0 auto; 
@@ -351,7 +351,6 @@
   }
   #nextBtn:hover{transform:translateY(-2px); background:#172554;}
   #nextBtn:active{transform:translateY(0);}
-  #nextBtn:disabled{opacity:0.6; cursor:not-allowed; transform:none;}
   
   .step-indicator{ font-family:var(--sans); font-weight:600; font-size:14px; color:var(--navy); letter-spacing: 0.02em; }
   
@@ -364,7 +363,7 @@
   /* 커스텀 유효성 검사 팝업 (중앙 고정) */
   #validationAlertOverlay {
     position: fixed; 
-    inset: 0;
+    top: 0; left: 0; right: 0; bottom: 0; 
     background: rgba(0,0,0,0.5); 
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
@@ -401,14 +400,20 @@
   @media (max-width:600px){
     .stage{padding:16px 12px;}
     .movement{padding:32px 20px;}
-    .intro-panel{padding:48px 20px 40px;}
-    .logo-wrap img { height: 56px; } 
-    .lockup-title-main { font-size: 28px; }
-    .lockup-title-sub { font-size: 20px; }
-    .intro-meta { flex-direction: row; gap: 8px; }
-    .intro-meta .meta-item { padding: 16px 4px; }
-    .meta-num { font-size: 20px; }
-    .meta-label { font-size: 12px; }
+    .intro-panel{padding:42px 18px 36px;}
+    .logo-wrap img { height: 52px; } 
+    .lockup-title-main { font-size: 26px; }
+    .lockup-title-sub { font-size: 18px; }
+    .intro-meta { gap: 6px; }
+    .intro-meta .meta-item { padding: 12px 4px; }
+    .meta-num { font-size: 18px; }
+    .meta-label { font-size: 11px; }
+    
+    /* 모바일 정사각형 버튼 텍스트/아이콘 크기 미세조정 */
+    .course-select-group { gap: 8px; }
+    .course-select-btn { font-size: 12px; padding: 10px 4px; border-radius: 12px; }
+    .course-select-btn svg { width: 24px; height: 24px; margin-bottom: 2px;}
+    
     .radio-group label{padding:12px 14px;}
   }
 </style>
@@ -437,7 +442,6 @@
           <div class="intro-sub-title">교육 만족도 설문조사</div>
           <div class="rule"></div>
           
-          <!-- 👉 수정 완료: p태그 적용 및 구조 단순화로 줄바꿈 완벽 해결 -->
           <div class="intro-body">
             <p>본 설문조사는 「2026년도 SCP과정 교육운영」을 위해 교육에 참여하신 직원분들의 의견을 반영하여 보다 실효성 있는 교육을 시행하고자 인재개발원에서 실시하는 조사입니다.</p>
             <p>따라서 교육을 받으시면서 느꼈던 점, 향후 개선해야 하는 점 등을 솔직하게 답변 해주시기 바랍니다.</p>
@@ -459,18 +463,26 @@
             </div>
           </div>
 
+          <!-- 👉 수정 완료: 정사각형 3개 버튼 나란히 배치 -->
           <div class="course-select-group">
             <button type="button" class="course-select-btn" onclick="startSurvey('day1')">
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
               </svg>
-              1일차 설문조사하기
+              1일차<br>설문조사하기
             </button>
             <button type="button" class="course-select-btn" onclick="startSurvey('day23')">
               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path>
               </svg>
-              2~3일차 설문조사하기
+              2~3일차<br>설문조사하기
+            </button>
+            <button type="button" class="course-select-btn" onclick="startSurvey('post')">
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <!-- 문서/체크리스트 형태의 새로운 아이콘 -->
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+              SCP 사후진단<br>진행하기
             </button>
           </div>
         </div>
@@ -488,10 +500,7 @@
                 <label><input type="radio" name="q1_motivation" value="상사 및 동료의 추천"> 상사 및 동료의 추천</label>
                 <label><input type="radio" name="q1_motivation" value="강제참석(필수이수 등)"> 강제참석(필수이수 등)</label>
                 <label><input type="radio" name="q1_motivation" value="자기계발"> 자기계발</label>
-                <div class="etc-option-row">
-                  <label><input type="radio" name="q1_motivation" value="기타" id="q1_etc_radio"> 기타</label>
-                  <input type="text" name="q1_motivation_etc" class="text-input" placeholder="직접입력" oninput="document.getElementById('q1_etc_radio').checked = true;">
-                </div>
+                <label><input type="radio" name="q1_motivation" value="기타"> 기타 <input type="text" name="q1_motivation_etc" class="text-input" style="width: auto; padding: 4px 8px; margin-top:0;" placeholder="직접입력"></label>
               </div>
             </div>
             <div class="scale-item">
@@ -1145,7 +1154,18 @@
         </div>
       </section>
 
-      <!-- Slide 10 : 완료 화면 -->
+      <!-- Slide 10 : 임시 사후 진단 플레이스홀더 -->
+      <section class="slide" id="slide_post_placeholder">
+        <div class="movement" style="text-align:center; padding: 80px 20px;">
+          <div class="m-head" style="justify-content:center; margin-bottom:24px;">
+            <span class="m-num" style="width:48px; height:48px; font-size:20px;">✍️</span>
+          </div>
+          <div class="m-title" style="margin-bottom:16px; font-size:22px; color:var(--navy-deep);">사후 진단 문항 대기중</div>
+          <div class="m-desc" style="font-size:15px;">전달해주실 사후 진단 문항 내용이<br>이곳에 업데이트될 예정입니다.</div>
+        </div>
+      </section>
+
+      <!-- Slide 11 : 완료 화면 -->
       <section class="slide thankyou" id="slide_thankyou">
         <div class="flourish">✓</div>
         <h2>설문이 완료되었습니다</h2>
@@ -1160,7 +1180,7 @@
   </form>
 </div>
 
-<!-- 커스텀 유효성 검사 / 오류 모달 팝업 (검증 실패, 제출 실패 공통 사용) -->
+<!-- 커스텀 유효성 검사 팝업 -->
 <div id="validationAlertOverlay">
   <div class="custom-alert-box">
     <div class="custom-alert-icon">
@@ -1168,7 +1188,7 @@
         <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
       </svg>
     </div>
-    <p class="custom-alert-msg" id="customAlertMsg">응답하지 않은 문항이 있습니다!<br>확인부탁드립니다!</p>
+    <p class="custom-alert-msg">응답하지 않은 문항이 있습니다!<br>확인부탁드립니다!</p>
     <button type="button" class="custom-alert-btn" onclick="closeValidationAlert()">확인</button>
   </div>
 </div>
@@ -1195,20 +1215,9 @@
   const ribbonFill = document.getElementById('ribbonFill');
   const loading = document.getElementById('loading');
   const validationOverlay = document.getElementById('validationAlertOverlay');
-  const customAlertMsg = document.getElementById('customAlertMsg');
-
-  const DEFAULT_VALIDATION_MSG = '응답하지 않은 문항이 있습니다!<br>확인부탁드립니다!';
-
-  // 커스텀 모달 표시/숨김 (검증 실패, 제출 실패 등 공통으로 재사용)
-  function showCustomAlert(message) {
-    customAlertMsg.innerHTML = message;
-    validationOverlay.classList.add('active');
-  }
 
   function closeValidationAlert() {
     validationOverlay.classList.remove('active');
-    // 다음 번에는 기본 메시지로 복원
-    customAlertMsg.innerHTML = DEFAULT_VALIDATION_MSG;
   }
 
   document.querySelectorAll('.scale-dots[data-q]').forEach(group => {
@@ -1223,6 +1232,7 @@
     });
   });
 
+  // 👉 추가: 사후 진단 버튼을 위한 라우팅 로직 연동
   function buildActiveSlides(type) {
     if (type === 'day1') {
       activeSlides = allSlides.filter(s => {
@@ -1232,7 +1242,12 @@
     } else if (type === 'day23') {
       activeSlides = allSlides.filter(s => {
         const id = s.id;
-        return id !== 'slide_14' && id !== 'slide_15';
+        return id !== 'slide_14' && id !== 'slide_15' && id !== 'slide_post_placeholder';
+      });
+    } else if (type === 'post') {
+      activeSlides = allSlides.filter(s => {
+        const id = s.id;
+        return id === 'slide_intro' || id === 'slide_post_placeholder' || id === 'slide_thankyou';
       });
     } else {
       activeSlides = [allSlides[0]];
@@ -1286,7 +1301,6 @@
     window.scrollTo({top:0, behavior:'auto'});
   }
 
-  // 객관식 문항 유효성 검사
   function validateCurrentSlide() {
     const currentSlide = activeSlides[currentIndex];
     const questionItems = currentSlide.querySelectorAll('.scale-item');
@@ -1294,14 +1308,12 @@
     for (let item of questionItems) {
       let isAnswered = true;
       
-      // 1. 1~5점 척도 버튼 검사
       const scaleGroup = item.querySelector('.scale-dots');
       if (scaleGroup) {
         const hiddenInput = item.querySelector('input[type="hidden"]');
         if (!hiddenInput || !hiddenInput.value) isAnswered = false;
       }
       
-      // 2. 라디오 버튼 검사
       const radioGroup = item.querySelector('.radio-group');
       if (radioGroup) {
         const radios = radioGroup.querySelectorAll('input[type="radio"]');
@@ -1314,9 +1326,8 @@
         }
       }
       
-      // 3. 미응답 항목 발견 시 처리
       if (!isAnswered) {
-        showCustomAlert(DEFAULT_VALIDATION_MSG);
+        validationOverlay.classList.add('active');
         item.scrollIntoView({ behavior: 'smooth', block: 'center' });
         
         const label = item.querySelector('.item-label');
@@ -1331,7 +1342,6 @@
   }
 
   nextBtn.addEventListener('click', () => {
-    // 다음/제출 버튼 누를 때 유효성 검사 실행
     if (currentIndex > 0 && currentIndex < activeSlides.length - 1) {
       if (!validateCurrentSlide()) {
         return; 
@@ -1379,7 +1389,9 @@
     
     const formData = new FormData(form);
     
-    const surveyTypeValue = (currentSurveyType === 'day1') ? '1일차 설문' : '2~3일차 설문';
+    let surveyTypeValue = '사후 진단 설문';
+    if (currentSurveyType === 'day1') surveyTypeValue = '1일차 설문';
+    else if (currentSurveyType === 'day23') surveyTypeValue = '2~3일차 설문';
     formData.append('survey_type', surveyTypeValue);
     
     fetch(scriptURL, { method:'POST', body: formData })
@@ -1393,7 +1405,7 @@
         loading.style.display = 'none';
         bottomNav.classList.remove('hidden');
         nextBtn.disabled = false;
-        showCustomAlert('제출 중 오류가 발생했습니다.<br>잠시 후 다시 시도해주세요.');
+        alert('제출 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
       });
   }
 </script>
