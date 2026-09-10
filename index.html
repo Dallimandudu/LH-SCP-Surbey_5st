@@ -182,7 +182,6 @@
   }
   .meta-label{font-size:12px; color:var(--ink-soft); font-weight:600;}
 
-  /* 3개 버튼 가로 배치 Grid */
   .course-select-group {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -190,7 +189,6 @@
     margin-top: 20px;
   }
 
-  /* 정사각형(1:1 비율) 글래스모피즘 버튼 디자인 */
   .course-select-btn {
     display: flex;
     flex-direction: column; 
@@ -200,7 +198,7 @@
     aspect-ratio: 1 / 1; 
     font-family: var(--sans);
     font-weight: 700; 
-    font-size: 18px; /* 폰트 사이즈 대폭 확대 */
+    font-size: 18px; 
     padding: 10px 6px;
     border: 1px solid rgba(255, 255, 255, 0.8);
     border-radius: 16px;
@@ -216,7 +214,6 @@
     word-break: keep-all;
   }
   
-  /* 코드로 직접 그린 일러스트 SVG 크기 지정 */
   .course-select-btn svg {
     width: 44px;
     height: 44px;
@@ -233,7 +230,6 @@
     transform: scale(1.15) rotate(-8deg);
   }
 
-  /* 일반 설문 패널 */
   .movement{
     position:relative; background:#fff; border:1px solid var(--line);
     border-radius: 16px;
@@ -284,7 +280,6 @@
   .cap-center { text-align: center; color: #94a3b8; }
   .cap-right { text-align: right; word-break: keep-all; }
 
-  /* 👉 유지됨: 무조건 2열 Grid로 고정하여 크기 완벽 통일 (나이 선택 등) */
   .radio-group{display:flex; flex-direction:column; gap:10px;}
   .radio-group.row-layout {
     display: grid;
@@ -364,7 +359,6 @@
     text-shadow: 0 2px 4px rgba(0,0,0,0.5);
   }
 
-  /* 커스텀 유효성 검사 팝업 (중앙 고정 유지) */
   #validationAlertOverlay {
     position: fixed; 
     top: 0; left: 0; right: 0; bottom: 0; 
@@ -413,7 +407,6 @@
     .meta-num { font-size: 18px; }
     .meta-label { font-size: 11px; }
     
-    /* 모바일 버튼 크기 세팅 (확대된 폰트 사이즈 반영) */
     .course-select-group { gap: 8px; }
     .course-select-btn { font-size: 16px; padding: 12px 4px; border-radius: 12px; }
     
@@ -466,11 +459,9 @@
             </div>
           </div>
 
-          <!-- 👉 수정 완료: 텍스트 확대 및 100% 코드로 구현한 컬러풀 일러스트 적용 -->
           <div class="course-select-group">
             
             <button type="button" class="course-select-btn" onclick="startSurvey('day1')">
-              <!-- 일러스트 1: 파란색 클립보드 (1일차) -->
               <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="32" cy="32" r="30" fill="#DBEAFE"/>
                 <rect x="20" y="18" width="24" height="28" rx="3" fill="#FFFFFF" stroke="#3B82F6" stroke-width="3"/>
@@ -481,7 +472,6 @@
             </button>
             
             <button type="button" class="course-select-btn" onclick="startSurvey('day23')">
-              <!-- 일러스트 2: 녹색 캘린더 (2~3일차) -->
               <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="32" cy="32" r="30" fill="#DCFCE7"/>
                 <rect x="18" y="20" width="28" height="26" rx="3" fill="#FFFFFF" stroke="#10B981" stroke-width="3"/>
@@ -495,7 +485,6 @@
             </button>
             
             <button type="button" class="course-select-btn" onclick="startSurvey('post')">
-              <!-- 일러스트 3: 노란색 문서와 연필 (사후진단) -->
               <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="32" cy="32" r="30" fill="#FEF3C7"/>
                 <path d="M22 20h16v24H22z" fill="#FFFFFF" stroke="#F59E0B" stroke-width="3" stroke-linejoin="round"/>
@@ -513,6 +502,7 @@
         </div>
       </section>
 
+      <!-- 일반 설문 영역 (Slide 1 ~ 9) 은 기존과 동일하게 유지 -->
       <!-- Slide 1 -->
       <section class="slide" id="slide_1">
         <div class="movement">
@@ -1182,14 +1172,191 @@
         </div>
       </section>
 
-      <!-- Slide 10 : 임시 사후 진단 플레이스홀더 -->
-      <section class="slide" id="slide_post_placeholder">
-        <div class="movement" style="text-align:center; padding: 80px 20px;">
-          <div class="m-head" style="justify-content:center; margin-bottom:24px;">
-            <span class="m-num" style="width:48px; height:48px; font-size:20px;">✍️</span>
+      <!-- ★신규 추가: 사후진단 1/3 (문항 1~3 및 인적사항) -->
+      <section class="slide" id="slide_post_1">
+        <div class="movement">
+          <div class="m-head"><span class="m-num">01</span><span class="m-tag">자기관리 역량강화 사후진단 (1/3)</span><span class="m-rule"></span></div>
+          
+          <div style="padding:16px; background:var(--point-soft); border-radius:12px; margin-bottom:24px; font-size:14px; line-height:1.65; color:var(--ink-soft); word-break:keep-all;">
+            안녕하세요. 본 설문은 교육 프로그램 참여 이전 업무역량, 자기 이해 및 재무관리 역량에 대한 이해도, 업무 몰입 및 정서적 변화 등에 대한 경험을 확인하기 위한 사후 조사입니다.<br><br>
+            응답해주신 내용은 교육 효과 분석 및 향후 프로그램 개선을 위한 기초자료로만 활용되며, 정답이 있는 문항이 아니므로 편하게 응답해주시면 됩니다. 바쁘시겠지만 보다 나은 교육을 위해 성실한 응답 부탁드립니다. 감사합니다.
           </div>
-          <div class="m-title" style="margin-bottom:16px; font-size:22px; color:var(--navy-deep);">사후 진단 문항 대기중</div>
-          <div class="m-desc" style="font-size:15px;">전달해주실 사후 진단 문항 내용이<br>이곳에 업데이트될 예정입니다.</div>
+
+          <div class="scale-block">
+            <div class="scale-item">
+              <p class="item-label">소속</p>
+              <input type="text" class="text-input required" name="post_dept" placeholder="소속을 입력해주세요">
+            </div>
+            <div class="scale-item">
+              <p class="item-label">이름</p>
+              <input type="text" class="text-input required" name="post_name" placeholder="이름을 입력해주세요">
+            </div>
+            
+            <div class="scale-item">
+              <p class="item-label">1. 진단도구를 통해(TA 진단 및 분석)을 통해 나의 심리적 성향과 대화 패턴을 객관적으로 명확히 이해하게 되었다.</p>
+              <div class="scale-dots" data-q="post_q1">
+                <button type="button" class="scale-btn" value="1">1</button>
+                <button type="button" class="scale-btn" value="2">2</button>
+                <button type="button" class="scale-btn" value="3">3</button>
+                <button type="button" class="scale-btn" value="4">4</button>
+                <button type="button" class="scale-btn" value="5">5</button>
+              </div>
+              <div class="scale-caption">
+                <span class="cap-left">매우 그렇지 않다</span>
+                <span class="cap-center">보통이다</span>
+                <span class="cap-right">매우 그렇다</span>
+              </div>
+              <input type="hidden" name="post_q1">
+            </div>
+            <div class="scale-item">
+              <p class="item-label">2. 본 과정을 통해 나와 다른 성향을 가진 동료들의 심리적 특성을 이해하고 상황에 맞는 소통 기준을 체득하게 되었다.</p>
+              <div class="scale-dots" data-q="post_q2">
+                <button type="button" class="scale-btn" value="1">1</button>
+                <button type="button" class="scale-btn" value="2">2</button>
+                <button type="button" class="scale-btn" value="3">3</button>
+                <button type="button" class="scale-btn" value="4">4</button>
+                <button type="button" class="scale-btn" value="5">5</button>
+              </div>
+              <div class="scale-caption">
+                <span class="cap-left">매우 그렇지 않다</span>
+                <span class="cap-center">보통이다</span>
+                <span class="cap-right">매우 그렇다</span>
+              </div>
+              <input type="hidden" name="post_q2">
+            </div>
+            <div class="scale-item">
+              <p class="item-label">3. 교육 이후, 나는 대화 중 마찰이나 오해가 발생했을 때 원인을 파악하여 대화를 긍정적인 방향으로 이끌 수 있는 노하우가 생겼다.</p>
+              <div class="scale-dots" data-q="post_q3">
+                <button type="button" class="scale-btn" value="1">1</button>
+                <button type="button" class="scale-btn" value="2">2</button>
+                <button type="button" class="scale-btn" value="3">3</button>
+                <button type="button" class="scale-btn" value="4">4</button>
+                <button type="button" class="scale-btn" value="5">5</button>
+              </div>
+              <div class="scale-caption">
+                <span class="cap-left">매우 그렇지 않다</span>
+                <span class="cap-center">보통이다</span>
+                <span class="cap-right">매우 그렇다</span>
+              </div>
+              <input type="hidden" name="post_q3">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ★신규 추가: 사후진단 2/3 (문항 4~6) -->
+      <section class="slide" id="slide_post_2">
+        <div class="movement">
+          <div class="m-head"><span class="m-num">02</span><span class="m-tag">자기관리 역량강화 사후진단 (2/3)</span><span class="m-rule"></span></div>
+          
+          <div class="scale-block">
+            <div class="scale-item">
+              <p class="item-label">4. 본 과정을 통해 재직 기간 및 은퇴 이후의 삶에 대비하여 생애 목표와 재무 로드맵을 구체화하는데 도움이 되었다.</p>
+              <div class="scale-dots" data-q="post_q4">
+                <button type="button" class="scale-btn" value="1">1</button>
+                <button type="button" class="scale-btn" value="2">2</button>
+                <button type="button" class="scale-btn" value="3">3</button>
+                <button type="button" class="scale-btn" value="4">4</button>
+                <button type="button" class="scale-btn" value="5">5</button>
+              </div>
+              <div class="scale-caption">
+                <span class="cap-left">매우 그렇지 않다</span>
+                <span class="cap-center">보통이다</span>
+                <span class="cap-right">매우 그렇다</span>
+              </div>
+              <input type="hidden" name="post_q4">
+            </div>
+            <div class="scale-item">
+              <p class="item-label">5. 본 과정을 통해 나의 현재 자산 및 현금 흐름 상태를 정기적으로 점검하고 개선 방향을 설정하는 데 큰 도움이 되었다.</p>
+              <div class="scale-dots" data-q="post_q5">
+                <button type="button" class="scale-btn" value="1">1</button>
+                <button type="button" class="scale-btn" value="2">2</button>
+                <button type="button" class="scale-btn" value="3">3</button>
+                <button type="button" class="scale-btn" value="4">4</button>
+                <button type="button" class="scale-btn" value="5">5</button>
+              </div>
+              <div class="scale-caption">
+                <span class="cap-left">매우 그렇지 않다</span>
+                <span class="cap-center">보통이다</span>
+                <span class="cap-right">매우 그렇다</span>
+              </div>
+              <input type="hidden" name="post_q5">
+            </div>
+            <div class="scale-item">
+              <p class="item-label">6. 교육 이후, 금융 시장 변화와 생애주기를 고려하여 수익성과 안정성을 균형 있게 배분한 맞춤형 자산 포트폴리오 구성 전략을 도출하는데 도움이 되었다.</p>
+              <div class="scale-dots" data-q="post_q6">
+                <button type="button" class="scale-btn" value="1">1</button>
+                <button type="button" class="scale-btn" value="2">2</button>
+                <button type="button" class="scale-btn" value="3">3</button>
+                <button type="button" class="scale-btn" value="4">4</button>
+                <button type="button" class="scale-btn" value="5">5</button>
+              </div>
+              <div class="scale-caption">
+                <span class="cap-left">매우 그렇지 않다</span>
+                <span class="cap-center">보통이다</span>
+                <span class="cap-right">매우 그렇다</span>
+              </div>
+              <input type="hidden" name="post_q6">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ★신규 추가: 사후진단 3/3 (문항 7~9) -->
+      <section class="slide" id="slide_post_3">
+        <div class="movement">
+          <div class="m-head"><span class="m-num">03</span><span class="m-tag">자기관리 역량강화 사후진단 (3/3)</span><span class="m-rule"></span></div>
+          
+          <div class="scale-block">
+            <div class="scale-item">
+              <p class="item-label">7. 교육 내용을 바탕으로 향후 나의 자산관리 계획을 현업과 일상에서 즉시 실천할 수 있는 구체적인 실행 방안을 수립하는데 도움이 되었다.</p>
+              <div class="scale-dots" data-q="post_q7">
+                <button type="button" class="scale-btn" value="1">1</button>
+                <button type="button" class="scale-btn" value="2">2</button>
+                <button type="button" class="scale-btn" value="3">3</button>
+                <button type="button" class="scale-btn" value="4">4</button>
+                <button type="button" class="scale-btn" value="5">5</button>
+              </div>
+              <div class="scale-caption">
+                <span class="cap-left">매우 그렇지 않다</span>
+                <span class="cap-center">보통이다</span>
+                <span class="cap-right">매우 그렇다</span>
+              </div>
+              <input type="hidden" name="post_q7">
+            </div>
+            <div class="scale-item">
+              <p class="item-label">8. 지역 명소 탐방 및 휴식을 통해 직무 스트레스를 해소하고, 현업 복귀를 위한 정서적 활력을 얻는데 도움이 되었다.</p>
+              <div class="scale-dots" data-q="post_q8">
+                <button type="button" class="scale-btn" value="1">1</button>
+                <button type="button" class="scale-btn" value="2">2</button>
+                <button type="button" class="scale-btn" value="3">3</button>
+                <button type="button" class="scale-btn" value="4">4</button>
+                <button type="button" class="scale-btn" value="5">5</button>
+              </div>
+              <div class="scale-caption">
+                <span class="cap-left">매우 그렇지 않다</span>
+                <span class="cap-center">보통이다</span>
+                <span class="cap-right">매우 그렇다</span>
+              </div>
+              <input type="hidden" name="post_q8">
+            </div>
+            <div class="scale-item">
+              <p class="item-label">9. 명사 특강에서 얻은 새로운 인사이트가 현업에 임하는 나의 관점을 확장하고 새로운 영감을 주었다.</p>
+              <div class="scale-dots" data-q="post_q9">
+                <button type="button" class="scale-btn" value="1">1</button>
+                <button type="button" class="scale-btn" value="2">2</button>
+                <button type="button" class="scale-btn" value="3">3</button>
+                <button type="button" class="scale-btn" value="4">4</button>
+                <button type="button" class="scale-btn" value="5">5</button>
+              </div>
+              <div class="scale-caption">
+                <span class="cap-left">매우 그렇지 않다</span>
+                <span class="cap-center">보통이다</span>
+                <span class="cap-right">매우 그렇다</span>
+              </div>
+              <input type="hidden" name="post_q9">
+            </div>
+          </div>
         </div>
       </section>
 
@@ -1269,12 +1436,13 @@
     } else if (type === 'day23') {
       activeSlides = allSlides.filter(s => {
         const id = s.id;
-        return id !== 'slide_14' && id !== 'slide_15' && id !== 'slide_post_placeholder';
+        return id !== 'slide_14' && id !== 'slide_15' && !id.startsWith('slide_post_');
       });
     } else if (type === 'post') {
       activeSlides = allSlides.filter(s => {
         const id = s.id;
-        return id === 'slide_intro' || id === 'slide_post_placeholder' || id === 'slide_thankyou';
+        // 기존 placeholder 대신 실제 생성한 사후진단 슬라이드 3장을 호출합니다.
+        return id === 'slide_intro' || id === 'slide_post_1' || id === 'slide_post_2' || id === 'slide_post_3' || id === 'slide_thankyou';
       });
     } else {
       activeSlides = [allSlides[0]];
@@ -1351,6 +1519,12 @@
           }
           if (!radioChecked) isAnswered = false;
         }
+      }
+
+      // 사후진단의 필수 텍스트 필드 (소속, 이름 등) 유효성 검사 추가
+      const requiredTextInput = item.querySelector('.text-input.required');
+      if (requiredTextInput) {
+        if (!requiredTextInput.value.trim()) isAnswered = false;
       }
       
       if (!isAnswered) {
